@@ -5,7 +5,6 @@ const gulp = require("gulp");
 const autoprefixer = require("gulp-autoprefixer");
 const cssbeautify = require("gulp-cssbeautify");
 const removeComments = require("gulp-strip-css-comments");
-const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const cssnano = require("gulp-cssnano");
 const uglify = require("gulp-uglify");
@@ -20,10 +19,12 @@ const fileinclude = require("gulp-file-include");
 //const webpackStream = require("webpack-stream");
 const browserSync = require("browser-sync").create();
 const prettyHtml = require("gulp-pretty-html");
+const ttf2woff = require("gulp-ttf2woff");
+const ttf2woff2 = require("gulp-ttf2woff2");
 
 /* Paths */
 const srcPath = "src/";
-const distPath = require("path").basename(__dirname);
+const distPath = "dist/";
 
 const path = {
   build: {
@@ -44,8 +45,8 @@ const path = {
   },
   watch: {
     html: srcPath + "**/*.html",
-    js: srcPath + "/assets/js/**/*.js",
-    css: srcPath + "/assets/scss/**/*.scss",
+    js: srcPath + "assets/js/**/*.js",
+    css: srcPath + "assets/scss/**/*.scss",
     images:
       srcPath +
       "/assets/images/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml,json}",
@@ -61,6 +62,7 @@ function serve() {
     server: {
       baseDir: "./" + distPath,
     },
+    notify: false,
   });
 }
 
@@ -85,55 +87,47 @@ function html(cb) {
       })
     )
     .pipe(dest(path.build.html))
-    .pipe(browserSync.reload({ stream: true }));
+    .pipe(browserSync.stream());
 
   cb();
 }
 
 function css(cb) {
-  return (
-    src(path.src.css, { base: srcPath + "assets/scss/" })
-      .pipe(
-        plumber({
-          errorHandler: function (err) {
-            notify.onError({
-              title: "SCSS Error",
-              message: "Error: <%= error.message %>",
-            })(err);
-            this.emit("end");
-          },
-        })
-      )
-      .pipe(
-        sass({
-          includePaths: "./node_modules/",
-        })
-      )
-      .pipe(
-        autoprefixer({
-          cascade: true,
-        })
-      )
-      .pipe(cssbeautify())
-      .pipe(dest(path.build.css))
-      .pipe(
-        cssnano({
-          zindex: false,
-          discardComments: {
-            removeAll: true,
-          },
-        })
-      )
-      .pipe(removeComments())
-
-      // IF needed rename file name
-      /* .pipe(rename({
-            suffix: ".min",
-            extname: ".css"
-        })) */
-      .pipe(dest(path.build.css))
-      .pipe(browserSync.reload({ stream: true }))
-  );
+  return src(path.src.css, { base: srcPath + "assets/scss/" })
+    .pipe(
+      plumber({
+        errorHandler: function (err) {
+          notify.onError({
+            title: "SCSS Error",
+            message: "Error: <%= error.message %>",
+          })(err);
+          this.emit("end");
+        },
+      })
+    )
+    .pipe(
+      sass({
+        includePaths: "./node_modules/",
+      })
+    )
+    .pipe(
+      autoprefixer({
+        cascade: true,
+      })
+    )
+    .pipe(cssbeautify())
+    .pipe(dest(path.build.css))
+    .pipe(
+      cssnano({
+        zindex: false,
+        discardComments: {
+          removeAll: true,
+        },
+      })
+    )
+    .pipe(removeComments())
+    .pipe(dest(path.build.css))
+    .pipe(browserSync.reload({ stream: true }));
 
   cb();
 }
@@ -154,12 +148,6 @@ function cssWatch(cb) {
     .pipe(
       sass({
         includePaths: "./node_modules/",
-      })
-    )
-    .pipe(
-      rename({
-        suffix: ".min",
-        extname: ".css",
       })
     )
     .pipe(dest(path.build.css))
@@ -251,7 +239,9 @@ function images(cb) {
 }
 
 function fonts(cb) {
+  src(path.src.fonts).pipe(ttf2woff()).pipe(dest(path.build.fonts));
   return src(path.src.fonts)
+    .pipe(ttf2woff2())
     .pipe(dest(path.build.fonts))
     .pipe(browserSync.reload({ stream: true }));
 

@@ -1,0 +1,1 @@
+$(document).ready(function(){let e=$("#page-preloader");e.fadeOut(1e3),$("body").addClass("hello")});
