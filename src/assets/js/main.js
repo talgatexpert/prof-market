@@ -1,1 +1,1 @@
-@@include("common/preloader.js")
+@@include("common/main.js")

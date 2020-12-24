@@ -4,15 +4,14 @@ $(document).ready(function () {
 
   /* $(window).scroll(function () {
     var scroll = $(window).scrollTop();
-
-    if (scroll >= 10) {
-      $("header").addClass("header__active");
+    if (scroll > 30) {
+      $(".header").addClass(".header__active");
     } else {
-      $("header").removeClass("header__active");
+      $(".header").removeClass(".header__active");
     }
   }); */
 
-  AOS.init({
+  /* AOS.init({
     once: true,
     anchorPlacement: "bottom-bottom",
     duration: 800,
@@ -20,7 +19,5 @@ $(document).ready(function () {
 
   onElementHeightChange(document.body, function () {
     AOS.refresh();
-  });
+  }); */
 });
-
-

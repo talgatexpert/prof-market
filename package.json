@@ -1,8 +1,8 @@
 {
-    "name": "brainscloud",
+    "name": "Cameron Class",
     "version": "1.0.0",
-    "description": "brainscloud",
-    "author": "brainscloud",
+    "description": "Cameron Class GULP",
+    "author": "Cameron Class",
     "devDependencies": {
         "browser-sync": "^2.26.13",
         "del": "^6.0.0",
@@ -19,6 +19,7 @@
         "gulp-strip-css-comments": "^2.0.0",
         "gulp-ttf2woff": "^1.1.1",
         "gulp-ttf2woff2": "^3.0.0",
+        "gulp-uglify": "^3.0.2",
         "gulp-uglify-es": "^2.0.0",
         "panini": "^1.7.1"
     },

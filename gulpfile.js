@@ -159,44 +159,48 @@ function cssWatch(cb) {
 }
 
 function js(cb) {
-  return src(path.src.js, { base: srcPath + "assets/js/" })
-    .pipe(
-      plumber({
-        errorHandler: function (err) {
-          notify.onError({
-            title: "JS Error",
-            message: "Error: <%= error.message %>",
-          })(err);
-          this.emit("end");
-        },
-      })
-    )
-    .pipe(fileinclude())
-    .pipe(uglify())
-
-    .pipe(dest(path.build.js))
-    .pipe(browserSync.reload({ stream: true }));
+  return (
+    src(path.src.js, { base: srcPath + "assets/js/" })
+      .pipe(
+        plumber({
+          errorHandler: function (err) {
+            notify.onError({
+              title: "JS Error",
+              message: "Error: <%= error.message %>",
+            })(err);
+            this.emit("end");
+          },
+        })
+      )
+      .pipe(fileinclude())
+      .pipe(uglify())
+      
+      .pipe(dest(path.build.js))
+      .pipe(browserSync.reload({ stream: true }))
+  );
 
   cb();
 }
 
 function jsWatch(cb) {
-  return src(path.watch.js, { base: srcPath + "assets/js/" })
-    .pipe(
-      plumber({
-        errorHandler: function (err) {
-          notify.onError({
-            title: "JS Error",
-            message: "Error: <%= error.message %>",
-          })(err);
-          this.emit("end");
-        },
-      })
-    )
-    .pipe(fileinclude())
-    .pipe(uglify())
-    .pipe(dest(path.build.js))
-    .pipe(browserSync.reload({ stream: true }));
+  return (
+    src(path.watch.js, { base: srcPath + "assets/js/" })
+      .pipe(
+        plumber({
+          errorHandler: function (err) {
+            notify.onError({
+              title: "JS Error",
+              message: "Error: <%= error.message %>",
+            })(err);
+            this.emit("end");
+          },
+        })
+      )
+      .pipe(fileinclude())
+      .pipe(uglify())
+      .pipe(dest(path.build.js))
+      .pipe(browserSync.reload({ stream: true }))
+  );
 
   cb();
 }
@@ -252,10 +256,7 @@ function watchFiles() {
   gulp.watch([path.watch.svg], svg);
 }
 
-const build = gulp.series(
-  clean,
-  gulp.parallel(html, css, js, images, fonts, svg)
-);
+const build = gulp.series(clean, gulp.parallel(html, css, js, images, fonts, svg));
 const watch = gulp.parallel(build, watchFiles, serve);
 
 /* Exports Tasks */
