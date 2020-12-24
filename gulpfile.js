@@ -14,9 +14,6 @@ const imagemin = require("gulp-imagemin");
 const del = require("del");
 const notify = require("gulp-notify");
 const fileinclude = require("gulp-file-include");
-/* if you want to use webpack stream - uncomment all comments and add webpack and webpack stream from npm*/
-//const webpack = require("webpack");
-//const webpackStream = require("webpack-stream");
 const browserSync = require("browser-sync").create();
 const prettyHtml = require("gulp-pretty-html");
 const ttf2woff = require("gulp-ttf2woff");
