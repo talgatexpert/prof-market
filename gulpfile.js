@@ -149,6 +149,7 @@ function cssWatch(cb) {
         includePaths: "./node_modules/",
       })
     )
+    .pipe(cssnano())
     .pipe(dest(path.build.css))
     .pipe(browserSync.reload({ stream: true }));
 
