@@ -1,0 +1,94 @@
+.card {
+    position: relative;
+    padding: 15px 10px 20px;
+    border-radius: 10px;
+
+    &-special {
+        background-color: $yellow;
+        border-radius: 35px;
+        font-size: 12px;
+        padding: 5px 10px;
+        position: absolute;
+        top: 15px;
+        margin-left: 10px;
+        overflow: hidden;
+    }
+
+    &-image {
+        margin-top: 15px;
+
+        img {
+            width: 188px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+
+    &-price {
+        margin-top: 20px;
+
+        &__new {
+            font-size: 22px;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        &__old {
+            font-size: 14px;
+            font-weight: 400px;
+            color: $light-grey;
+            text-decoration: line-through;
+        }
+    }
+
+    &-rating {
+        display: flex;
+        align-items: center;
+
+        ul {
+            display: flex;
+            margin-right: 5px;
+
+            &>li>img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        &__reviews {
+            font-size: 12px;
+            color: $light-grey;
+        }
+    }
+
+    &-title {
+        margin-top: 8px;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    &-actions {
+        display: flex;
+        align-items: center;
+        height: 0px;
+        overflow: hidden;
+        transition: 0.2s ease-out;
+
+        &__wish {
+            margin-left: 14px;
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    &:hover &-actions {
+        overflow: visible;
+        height: 46px;
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+    }
+
+}
