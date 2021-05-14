@@ -27,4 +27,48 @@ $(document).ready(function () {
     destination = $(elementClick).offset().top;
     $("body,html").animate({ scrollTop: destination }, 800);
   }); */
+
+  var homePageSlider = new Swiper(".home-page-slider", {
+    slidesPerView: 4,
+    spaceBetween: 30,
+    loop: true,
+
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        navigation: false,
+
+
+      },
+      // when window width is >= 480px
+      480: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        navigation: false
+
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },  
+
+      },
+
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+
+      },
+    }
+  });
+
 });

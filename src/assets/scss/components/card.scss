@@ -2,6 +2,8 @@
     position: relative;
     padding: 15px 10px 20px;
     border-radius: 10px;
+    transition: 0.2s ease-out;
+
 
     &-special {
         background-color: $yellow;
@@ -11,7 +13,6 @@
         position: absolute;
         top: 15px;
         margin-left: 10px;
-        overflow: hidden;
     }
 
     &-image {
@@ -59,20 +60,24 @@
         &__reviews {
             font-size: 12px;
             color: $light-grey;
+
         }
     }
 
     &-title {
         margin-top: 8px;
         font-size: 14px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        height: 40px;
+        overflow: hidden;
     }
 
     &-actions {
+        margin-top: 5px;
+        z-index: 50;
         display: flex;
         align-items: center;
-        height: 0px;
-        overflow: hidden;
+        opacity: 0;
         transition: 0.2s ease-out;
 
         &__wish {
@@ -80,15 +85,43 @@
             width: 24px;
             height: 24px;
         }
+
+        
     }
 
     &:hover &-actions {
-        overflow: visible;
-        height: 46px;
+        opacity: 1;
     }
 
     &:hover {
-        box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
     }
 
+}
+
+@include mobile {
+    .card {
+
+
+        &-price{
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-actions{
+            opacity: 1;
+
+            &__add img{
+                margin: 0;
+            }    
+
+            &__add > span { 
+                display: none;
+            }
+        }
+        &-rating__reviews span {
+            display: none;
+        }
+
+    }
 }

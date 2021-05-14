@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 const { src, dest } = require("gulp");
 const gulp = require("gulp");
@@ -18,7 +18,6 @@ const browserSync = require("browser-sync").create();
 const prettyHtml = require("gulp-pretty-html");
 const ttf2woff = require("gulp-ttf2woff");
 const ttf2woff2 = require("gulp-ttf2woff2");
-
 /* Paths */
 const srcPath = "src/";
 const distPath = "dist/";
