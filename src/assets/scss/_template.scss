@@ -21,7 +21,7 @@ a {
     }
 }
 
-button {
+button, [role="button"] {
     font-family: $font;
 
     &:focus {
