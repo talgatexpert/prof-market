@@ -1,0 +1,1 @@
+$(document).ready((function(){$("#page-preloader").fadeOut(1e3)}));
